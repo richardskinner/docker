@@ -7,10 +7,13 @@ RUN yes | pecl install xdebug \
     && echo "xdebug.remote_host=docker.for.mac.localhost" >> /usr/local/etc/php/conf.d/xdebug.ini
 
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends sudo git zip
+    apt-get install -y --no-install-recommends \
+    zlib1g-dev \
+    sudo \
+    git \
+    zip
 
-RUN docker-php-ext-install pdo_mysql
-RUN docker-php-ext-install bcmath
+RUN docker-php-ext-install pdo_mysql bcmath zip
 
 RUN curl --silent --show-error https://getcomposer.org/installer | php
 
